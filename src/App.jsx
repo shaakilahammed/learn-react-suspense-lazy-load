@@ -1,48 +1,30 @@
-import { Suspense, useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import Comments from './components/Comments';
-import PostSelector from './components/PostSelector';
+import { useState } from 'react';
+import LazyLoad from './pages/LazyLoad';
+import SuspenseErrorBoundary from './pages/SuspenseErrorBoundary';
 
 function App() {
-    const [selectedPostId, setSelectedPostId] = useState(null);
+    const [isLazyLoad, setIsLazyLoad] = useState(false);
 
-    const handleSelectPost = (e) => {
-        setSelectedPostId(e.target.value);
-    };
     return (
-        <div>
-            <h1>React Suspense and Error Boundaries</h1>
-
-            <div>
-                <ErrorBoundary
-                    fallback={
-                        <span className="text-rose-900  py-2 w-full">
-                            Error on fetching post
-                        </span>
-                    }
+        <>
+            <div className="w-full py-2 mb-2 flex justify-evenly">
+                <button
+                    className="border border-yellow-400 hover:bg-yellow-400 rounded-lg px-3 py-1 justify-center text-center"
+                    onClick={() => setIsLazyLoad(true)}
                 >
-                    <Suspense fallback={<span>Loading posts...</span>}>
-                        <PostSelector onSelectPost={handleSelectPost} />
-                    </Suspense>
-
-                    {selectedPostId && (
-                        <ErrorBoundary
-                            fallback={
-                                <span className="text-rose-900  py-2 w-full">
-                                    Error on fetching comments
-                                </span>
-                            }
-                        >
-                            <Suspense
-                                fallback={<span>Loading comments...</span>}
-                            >
-                                <Comments postId={selectedPostId} />
-                            </Suspense>
-                        </ErrorBoundary>
-                    )}
-                </ErrorBoundary>
+                    Lazy Load Example
+                </button>
+                <button
+                    className="border border-orange-400 hover:bg-orange-400 rounded-lg px-3 py-1 justify-center text-center"
+                    onClick={() => setIsLazyLoad(false)}
+                >
+                    Suspense Example
+                </button>
             </div>
-        </div>
+            <div className="px-20">
+                {isLazyLoad ? <LazyLoad /> : <SuspenseErrorBoundary />}
+            </div>
+        </>
     );
 }
 

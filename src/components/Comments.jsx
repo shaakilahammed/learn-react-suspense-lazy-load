@@ -10,12 +10,14 @@ export default function Comments({ postId }) {
 
     return (
         <div>
-            <h2>Comments</h2>
+            <h2 className="text-xl font-semibold">Comments</h2>
 
             <div>
                 <ul>
-                    {comments.map((comment) => (
-                        <li key={comment.id}>{comment.name}</li>
+                    {comments.map((comment, index) => (
+                        <li key={comment.id}>
+                            {index + 1}. {comment.name}
+                        </li>
                     ))}
                 </ul>
             </div>
