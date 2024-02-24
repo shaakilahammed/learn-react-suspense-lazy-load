@@ -9,7 +9,7 @@ import { demos } from '../data/data';
 // const SizeDemo = React.lazy(() => import('../components/SizeDemo'));
 
 const importDemos = (file) => {
-    return React.lazy(() => import(`../components/${file}`));
+    return React.lazy(() => import(`../components/${file}.jsx`));
 };
 
 const LazyLoad = () => {
