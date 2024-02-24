@@ -4,7 +4,7 @@ import use from '../hooks/use';
 export default function Comments({ postId }) {
     const comments = use(
         fetchData(
-            `https://jsonplaceholder.typicode.com/posts/${postId}/comment`
+            `https://jsonplaceholder.typicode.com/posts/${postId}/comments`
         )
     );
 
