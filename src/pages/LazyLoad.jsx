@@ -15,8 +15,8 @@ const importDemos = (file) => {
 const LazyLoad = () => {
     const [selectedDemo, setSelectedDemo] = useState(null);
 
-    const handleSelectedDemo = (file) => {
-        const Demo = importDemos(file);
+    const handleSelectedDemo = async (file) => {
+        const Demo = await importDemos(file);
         setSelectedDemo(<Demo />);
     };
     return (
